@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import MasteryPointAllocation from "@/components/MasteryPointAllocation.vue";
+import DamageCalculator from "@/components/DamageCalculator.vue";
 </script>
 
 <template>
   <main>
-    <MasteryPointAllocation />
+    <DamageCalculator />
   </main>
 </template>

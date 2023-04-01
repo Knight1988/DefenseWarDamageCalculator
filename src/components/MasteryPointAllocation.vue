@@ -25,7 +25,8 @@ import {
 
 export default {
   name: "MasteryPointAllocation",
-  setup() {
+  emits: ['update:value'],
+  setup(props, context) {
     const masteryPoints = reactive([
       [new CritChanceNode(3), new AttackSpeedNode(0), new OtherNode(0)],
       [new DamageNode(3, 5), new CritDamageNode(0, 50), new OtherNode(0)],
@@ -34,6 +35,7 @@ export default {
 
     const masteryClicked = (rowIndex, columnIndex) => {
       adjustPoints(masteryPoints[rowIndex], columnIndex, 3);
+      context.emit('update:value', 1)
     };
 
     const adjustPoints = (arr, index, max) => {
