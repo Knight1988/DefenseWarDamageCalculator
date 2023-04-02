@@ -22,6 +22,7 @@ import {
   DamageNode, HighStarDamageNode, LowStarDamageNode,
   OtherNode
 } from "@/models/MasteryNode";
+import {MasteryModel} from "@/models/MasteryModel";
 
 export default {
   name: "MasteryPointAllocation",
@@ -35,7 +36,7 @@ export default {
 
     const masteryClicked = (rowIndex, columnIndex) => {
       adjustPoints(masteryPoints[rowIndex], columnIndex, 3);
-      context.emit('update:value', 1)
+      context.emit('update:value', MasteryModel.ParseFromMasteryNodes(masteryPoints))
     };
 
     const adjustPoints = (arr, index, max) => {

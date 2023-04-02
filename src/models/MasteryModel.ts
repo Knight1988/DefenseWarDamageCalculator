@@ -4,9 +4,10 @@ export class MasteryModel {
     attackPower: number = 0;
     critDamage: number = 0;
 
-    static ParseFromMasteryNodes(nodes: MasteryNode[][]){
+    static ParseFromMasteryNodes(nodes: MasteryNode[][]): MasteryModel {
         const model = new MasteryModel();
         model.attackPower += nodes[1][0].value;
-        model.critDamage += nodes[1][0].value;
+        model.critDamage += nodes[1][1].value;
+        return model;
     }
 }

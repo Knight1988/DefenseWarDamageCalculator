@@ -2,7 +2,7 @@
   <main>
     <MasteryPointAllocation v-model=value @update:value="handleUpdateValue" />
   </main>
-  <p>Value: {{ value }}</p>
+  <p>Value: {{ masteryPoints }}</p>
 </template>
 
 <script>
@@ -14,17 +14,17 @@ export default {
   components: {MasteryPointAllocation},
   setup() {
     // Create a reactive ref to hold the value
-    const value = ref('');
+    const masteryPoints = ref('');
 
     // Define a function to handle the update event
     function handleUpdateValue(newValue) {
-      value.value = newValue;
+      masteryPoints.value = newValue;
       console.log(newValue);
     }
 
     // Return the value and the handleUpdateValue function
     return {
-      value,
+      masteryPoints,
       handleUpdateValue,
     };
   }
