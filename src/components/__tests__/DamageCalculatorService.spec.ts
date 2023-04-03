@@ -3,48 +3,96 @@ import {DamageCalculatorService} from "../../services/DamageCalculatorService";
 import {DamageInput} from "../../models/DamageInput";
 
 const damageCalculatorService = new DamageCalculatorService();
+const testCases = [
+    {
+        input: { baseDamage: 143, masteryAttackPower: 0.6 },
+        expectedDamage: 229,
+        expectedCritDamage: 458,
+    },
+    {
+        input: { baseDamage: 143, masteryAttackPower: 0.3, masteryCritDamage: 1.5 },
+        expectedDamage: 186,
+        expectedCritDamage: 651,
+    },
+    {
+        input: { baseDamage: 143, masteryAttackPower: 0, masteryCritDamage: 3 },
+        expectedDamage: 143,
+        expectedCritDamage: 715,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 0, masteryCritDamage: 0, coreCritDamage: 0.2 },
+        expectedDamage: 154,
+        expectedCritDamage: 339,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 0.3, masteryCritDamage: 1.5, coreCritDamage: 0.2 },
+        expectedDamage: 200,
+        expectedCritDamage: 740,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 1.8, masteryCritDamage: 1.5, coreCritDamage: 0.2 },
+        expectedDamage: 431,
+        expectedCritDamage: 1595,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 1.8, masteryCritDamage: 1.5, coreCritDamage: 0.2,
+            starAttackPower: 0.5 },
+        expectedDamage: 647,
+        expectedCritDamage: 2394,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 1.8, masteryCritDamage: 1.5, coreCritDamage: 0.2,
+            starAttackPower: 0.5, additionDamage: 0.3 },
+        expectedDamage: 841,
+        expectedCritDamage: 3112,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 0, masteryCritDamage: 0, coreCritDamage: 0.2,
+            starAttackPower: 0, additionDamage: 0, bariBuff: 0.98 },
+        expectedDamage: 305,
+        expectedCritDamage: 671,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 0.3, masteryCritDamage: 0, coreCritDamage: 0.2,
+            starAttackPower: 0, additionDamage: 0, bariBuff: 0.98 },
+        expectedDamage: 396,
+        expectedCritDamage: 871,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 0.3, masteryCritDamage: 0, coreCritDamage: 0.2,
+            starAttackPower: 0, additionDamage: 0, monaBuff: 0.4 },
+        expectedDamage: 280,
+        expectedCritDamage: 616,
+    },
+    {
+        input: { baseDamage: 154, masteryAttackPower: 0.3, masteryCritDamage: 0, coreCritDamage: 0.2,
+            starAttackPower: 0, additionDamage: 0, monaBuff: 0.4, bariBuff: 0.98 },
+        expectedDamage: 555,
+        expectedCritDamage: 1221,
+    },
+];
 describe('DamageCalculatorTests', () => {
-    const testCases = [
-        { input: { baseDamage: 143, masteryAttackPower: 30 }, expectedOutput: 185 },
-        { input: { baseDamage: 143, masteryAttackPower: 20, starAttackPower: 50 }, expectedOutput: 256 },
-        { input: { baseDamage: 143, masteryAttackPower: 20, starAttackPower: 50, additionDamage: 30 }, expectedOutput: 332 },
-    ];
-
-    for (const { input, expectedOutput } of testCases) {
-        it(`should return ${expectedOutput} when input is ${JSON.stringify(input)}`, () => {
+    for (const { input, expectedDamage } of testCases) {
+        it(`should return ${expectedDamage} when input is ${JSON.stringify(input)}`, () => {
             const newInput = {
                 ...new DamageInput(),
                 ...input
             }
             const output = damageCalculatorService.calculateDamage(newInput);
-            expect(output).toBe(expectedOutput);
+            expect(output).toBe(expectedDamage);
         });
     }
 });
 
 describe('CritDamageCalculatorTests', () => {
-    const testCases = [
-        { input: { baseDamage: 143, masteryCritDamage: 150 }, expectedOutput: 500 },
-        { input: { baseDamage: 143, masteryAttackPower: 10, masteryCritDamage: 100 }, expectedOutput: 471 },
-        { input: { baseDamage: 143, masteryAttackPower: 20, masteryCritDamage: 50 }, expectedOutput: 427 },
-        { input: { baseDamage: 143, masteryCritDamage: 150, starAttackPower: 50 }, expectedOutput: 749 },
-        { input: { baseDamage: 143, masteryAttackPower: 10, masteryCritDamage: 100, starAttackPower: 50 }, expectedOutput: 705 },
-        { input: { baseDamage: 143, masteryAttackPower: 30, masteryCritDamage: 0, starAttackPower: 50 }, expectedOutput: 554 },
-        { input: { baseDamage: 143, masteryCritDamage: 150, additionDamage: 30 }, expectedOutput: 650 },
-        { input: { baseDamage: 143, masteryAttackPower: 10, masteryCritDamage: 100, additionDamage: 30 }, expectedOutput: 612 },
-        { input: { baseDamage: 143, masteryCritDamage: 150, starAttackPower: 50, additionDamage: 30 }, expectedOutput: 973 },
-        { input: { baseDamage: 143, masteryAttackPower: 10, masteryCritDamage: 100, starAttackPower: 50, additionDamage: 30 }, expectedOutput: 916 },
-        { input: { baseDamage: 154, coreCritDamage: 20 }, expectedOutput: 338 },
-    ];
-
-    for (const { input, expectedOutput } of testCases) {
-        it(`should return ${expectedOutput} when input is ${JSON.stringify(input)}`, () => {
+    for (const { input, expectedCritDamage } of testCases) {
+        it(`should return ${expectedCritDamage} when input is ${JSON.stringify(input)}`, () => {
             const newInput = {
                 ...new DamageInput(),
                 ...input
             }
             const output = damageCalculatorService.calculateCritDamage(newInput);
-            expect(output).toBe(expectedOutput);
+            expect(output).toBe(expectedCritDamage);
         });
     }
 });

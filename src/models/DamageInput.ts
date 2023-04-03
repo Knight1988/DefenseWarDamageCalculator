@@ -5,4 +5,6 @@ export class DamageInput {
     coreCritDamage: number = 0;
     starAttackPower: number = 0;
     additionDamage: number = 0;
+    bariBuff: number = 0;
+    monaBuff: number = 0;
 }
