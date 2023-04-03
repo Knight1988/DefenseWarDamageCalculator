@@ -22,7 +22,7 @@ export abstract class MasteryNode {
 
 export class OtherNode extends MasteryNode {
     constructor(point: number) {
-        super(point, 1);
+        super(point, 0.01);
     }
     public get displayText(): any {
         return computed(() => `Other: ${this.value}`);
@@ -31,49 +31,55 @@ export class OtherNode extends MasteryNode {
 
 export class CritChanceNode extends MasteryNode {
     constructor(point: number) {
-        super(point, 3);
+        super(point, 0.03);
     }
 
     public get displayText(): any {
-        return computed(() => `Crit chance: ${this.value}%`);
+        const value = (this.value * 100).toFixed(0)
+        return computed(() => `Crit chance: ${value}%`);
     }
 }
 
 export class AttackSpeedNode extends MasteryNode {
     constructor(point: number) {
-        super(point, 5);
+        super(point, 0.05);
     }
     public get displayText(): any {
-        return computed(() => `Attack speed: ${this.value}%`);
+        const value = (this.value * 100).toFixed(0)
+        return computed(() => `Attack speed: ${value}%`);
     }
 }
 
 export class DamageNode extends MasteryNode {
     public get displayText(): any {
-        return computed(() => `Damage: ${this.value}%`);
+        const value = (this.value * 100).toFixed(0)
+        return computed(() => `Damage: ${value}%`);
     }
 }
 
 export class CritDamageNode extends MasteryNode {
     public get displayText(): any {
-        return computed(() => `Crit Damage: ${this.value}%`);
+        const value = (this.value * 100).toFixed(0)
+        return computed(() => `Crit Damage: ${value}%`);
     }
 }
 
 export class LowStarDamageNode extends MasteryNode {
     constructor(point: number) {
-        super(point, 50);
+        super(point, 0.5);
     }
     public get displayText(): any {
-        return computed(() => `1-4 Star damage: ${this.value}%`);
+        const value = (this.value * 100).toFixed(0)
+        return computed(() => `1-4 Star damage: ${value}%`);
     }
 }
 
 export class HighStarDamageNode extends MasteryNode {
     constructor(point: number) {
-        super(point, 50);
+        super(point, 0.5);
     }
     public get displayText(): any {
-        return computed(() => `5-7 Star damage: ${this.value}%`);
+        const value = (this.value * 100).toFixed(0)
+        return computed(() => `5-7 Star damage: ${value}%`);
     }
 }

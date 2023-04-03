@@ -1,4 +1,4 @@
-import {DamageInput} from "@/models/DamageInput";
+import type {DamageInput} from "@/models/DamageInput";
 
 export class DamageCalculatorService {
     public calculateDamage(input: DamageInput): number {

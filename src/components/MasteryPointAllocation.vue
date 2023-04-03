@@ -30,12 +30,18 @@ export default {
   setup(props, context) {
     const masteryPoints = reactive([
       [new CritChanceNode(3), new AttackSpeedNode(0), new OtherNode(0)],
-      [new DamageNode(3, 5), new CritDamageNode(0, 50), new OtherNode(0)],
-      [new LowStarDamageNode(3, 5), new HighStarDamageNode(0, 50), new OtherNode(0)],
+      [new DamageNode(3, 0.05), new CritDamageNode(0, 0.5), new OtherNode(0)],
+      [new LowStarDamageNode(1), new HighStarDamageNode(0), new OtherNode(0)],
+      [new DamageNode(3, 0.05), new AttackSpeedNode(0), new OtherNode(0)],
     ]);
 
     const masteryClicked = (rowIndex, columnIndex) => {
-      adjustPoints(masteryPoints[rowIndex], columnIndex, 3);
+      if (rowIndex === 2) {
+        adjustPoints(masteryPoints[rowIndex], columnIndex, 1);
+      } else {
+        adjustPoints(masteryPoints[rowIndex], columnIndex, 3);
+      }
+
       context.emit('update:value', MasteryModel.ParseFromMasteryNodes(masteryPoints))
     };
 
