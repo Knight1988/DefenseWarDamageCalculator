@@ -1,14 +1,10 @@
 <template>
-  <div class="row">
-    <div class="col-6">
-      <div class="row mb-2" v-for="(row, rowIndex) in masteryPoints" :key="rowIndex">
-        <div class="col-4" v-for="(button, columnIndex) in row" :key="columnIndex">
-          <button :class="{ 'btn-primary': button.isPrimary, 'btn-secondary': !button.isPrimary }"
-                  class="btn btn-primary"
-                  @click="masteryClicked(rowIndex, columnIndex)"
-          >{{ button.displayText }}</button>
-        </div>
-      </div>
+  <div class="row mb-2" v-for="(row, rowIndex) in masteryPoints" :key="rowIndex">
+    <div class="col-4" v-for="(button, columnIndex) in row" :key="columnIndex">
+      <button :class="{ 'btn-primary': button.isPrimary, 'btn-secondary': !button.isPrimary }"
+              class="btn btn-primary"
+              @click="masteryClicked(rowIndex, columnIndex)"
+      >{{ button.displayText }}</button>
     </div>
   </div>
 </template>
