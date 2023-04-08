@@ -1,5 +1,6 @@
 export class DamageInput {
     baseDamage: number = 0;
+    attackSpeed: number = 0;
     masteryAttackPower: number = 0;
     masteryCritDamage: number = 0;
     coreCritDamage: number = 0;

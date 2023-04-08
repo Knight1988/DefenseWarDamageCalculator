@@ -1,6 +1,13 @@
 import type {DamageInput} from "@/models/DamageInput";
+import {DamageOutput} from "@/models/DamageOutput";
 
 export class DamageCalculatorService {
+    public calculateAll(input: DamageInput): DamageOutput {
+        const damageOutput = new DamageOutput();
+        damageOutput.damage = this.calculateDamage(input);
+        damageOutput.critDamage = this.calculateCritDamage(input);
+        return damageOutput;
+    }
     public calculateDamage(input: DamageInput): number {
         const bonusDamage = 1 + input.masteryAttackPower;
         let damage = input.baseDamage * bonusDamage;
